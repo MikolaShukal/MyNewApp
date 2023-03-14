@@ -16,6 +16,8 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'react/prop-types': 'off',
     'object-curly-newline': 'off',
-    allowArrowFunctions: 0,
+    'func-names': 'off',
+    'react/function-component-definition': 'off',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
   },
 };

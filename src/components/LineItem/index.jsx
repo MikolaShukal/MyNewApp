@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, Image, TouchableOpacity, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useDispatch, useSelector } from 'react-redux';
 import { capitalize } from '../../util/Index';
+import { addToFavorites, removeFromFavorites } from '../../slices/photosSlice';
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -36,6 +38,16 @@ const styles = StyleSheet.create({
 });
 
 function LineItem({ item }) {
+  const dispatch = useDispatch();
+  const photos = useSelector((state) => state.photos.favorites);
+
+  const ifExists = (photo) => {
+    if (photos.filter((itm) => itm.id === photo.id).length > 0) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <View style={styles.itemContainer}>
       <Image style={styles.image} source={{ uri: item.thumbnailUrl }} />
@@ -44,9 +56,15 @@ function LineItem({ item }) {
       </Text>
       <TouchableOpacity
         style={styles.iconContainer}
-        onPress={() => console.log(`you liked ${item.title} with id:${item.id}`)}
+        onPress={() => {
+          if (ifExists(item)) {
+            dispatch(removeFromFavorites(item));
+          } else {
+            dispatch(addToFavorites(item));
+          }
+        }}
       >
-        <Ionicons name="heart-outline" color="red" size={20} />
+        <Ionicons name={ifExists(item) ? 'heart' : 'heart-outline'} color="red" size={20} />
       </TouchableOpacity>
     </View>
   );

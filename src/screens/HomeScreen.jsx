@@ -2,8 +2,10 @@ import { StyleSheet, View, SafeAreaView, FlatList, TextInput } from 'react-nativ
 
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import SearchIcon from '../../assets/SearchIcon';
 import LineItem from '../components/LineItem';
+import { setPhotos } from '../slices/photosSlice';
 
 const styles = StyleSheet.create({
   navigatorContainer: {
@@ -41,9 +43,9 @@ const styles = StyleSheet.create({
 
 export default function HomeScreen() {
   const [photosArray, setPhotosArray] = useState([]);
-  // const [likedArray, setLikedArray] = useState([]);
   const [searchArray, setSearchArray] = useState([]);
   const [search, setSearch] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/photos?albumId=1')
@@ -51,6 +53,7 @@ export default function HomeScreen() {
       .then((json) => {
         setSearchArray(json);
         setPhotosArray(json);
+        dispatch(setPhotos(json));
       })
       .catch((error) => {
         console.error(error);
@@ -71,8 +74,6 @@ export default function HomeScreen() {
       setSearch(text);
     }
   };
-
-  // console.log(JSON.stringify(likedArray, null, 4));
 
   return (
     <View style={styles.navigatorContainer}>
