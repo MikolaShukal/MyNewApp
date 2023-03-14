@@ -37,6 +37,9 @@ export default () => (
     <Tab.Screen
       options={{
         tabBarIcon: FavoriteButton,
+        headerStyle: {
+          backgroundColor: '#F5E9CF',
+        },
       }}
       name="Favorites"
       component={FavoritesScreen}
