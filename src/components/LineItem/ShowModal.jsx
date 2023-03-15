@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const App = ({ item, modalVisible, hide }) => (
+const ShowModal = ({ item, modalVisible, hide }) => (
   <View style={styles.centeredView}>
     <Modal animationType="slide" transparent visible={modalVisible}>
       <View style={styles.modalView}>
@@ -50,4 +50,4 @@ const App = ({ item, modalVisible, hide }) => (
   </View>
 );
 
-export default App;
+export default ShowModal;

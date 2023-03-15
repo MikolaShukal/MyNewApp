@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import SearchIcon from '../../assets/SearchIcon';
-import LineItem from '../components/LineItem';
+import LineItem from '../components/LineItem/LineItem';
 import { setPhotos } from '../slices/photosSlice';
 
 const styles = StyleSheet.create({

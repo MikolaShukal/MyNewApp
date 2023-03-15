@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
 import { useSelector } from 'react-redux';
-import LineItem from '../components/LineItem';
+import LineItem from '../components/LineItem/LineItem';
 
 const styles = StyleSheet.create({
   navigatorContainer: {
