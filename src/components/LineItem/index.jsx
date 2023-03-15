@@ -1,9 +1,11 @@
-import React from 'react';
-import { StyleSheet, Text, Image, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, Image, TouchableOpacity, View, Pressable } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { capitalize } from '../../util/Index';
 import { addToFavorites, removeFromFavorites } from '../../slices/photosSlice';
+import ShowModal from './ShowModal';
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -40,6 +42,7 @@ const styles = StyleSheet.create({
 function LineItem({ item }) {
   const dispatch = useDispatch();
   const photos = useSelector((state) => state.photos.favorites);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const ifExists = (photo) => {
     if (photos.filter((itm) => itm.id === photo.id).length > 0) {
@@ -48,9 +51,15 @@ function LineItem({ item }) {
     return false;
   };
 
+  const show = () => setModalVisible(true);
+  const hide = () => setModalVisible(false);
+
   return (
     <View style={styles.itemContainer}>
-      <Image style={styles.image} source={{ uri: item.thumbnailUrl }} />
+      <Pressable onPress={show}>
+        <Image style={styles.image} source={{ uri: item.thumbnailUrl }} />
+      </Pressable>
+      <ShowModal item={item} modalVisible={modalVisible} hide={hide} />
       <Text numberOfLines={1} style={styles.textContainer}>
         {capitalize(item.title + item.title)}
       </Text>
