@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const App = ({ item }, modalVisible, hide) => (
+const App = ({ item, modalVisible, hide }) => (
   <View style={styles.centeredView}>
     <Modal animationType="slide" transparent visible={modalVisible}>
       <View style={styles.modalView}>
         <Image style={styles.image} source={{ uri: item.url }} />
-        <Pressable style={[styles.button, styles.buttonClose]} onPress={hide}>
+        <Pressable style={styles.button} onPress={hide}>
           <Ionicons name="arrow-down-circle-outline" color="black" size={30} />
         </Pressable>
       </View>
