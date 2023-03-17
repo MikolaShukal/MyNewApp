@@ -2,8 +2,8 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
-import HomeScreen from '../screens/HomeScreen';
 import FavoritesScreen from '../screens/FavoritesScreen';
+import HomeScreen from '../screens/HomeScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +15,7 @@ const FavoriteButton = ({ focused }) => (
   <Ionicons name={focused ? 'heart' : 'heart-outline'} color="#7DB9B6" size={25} />
 );
 
-export default () => (
+const MyTabs = () => (
   <Tab.Navigator
     screenOptions={{
       tabBarStyle: {
@@ -46,3 +46,5 @@ export default () => (
     />
   </Tab.Navigator>
 );
+
+export default MyTabs;

@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, Image, TouchableOpacity, View, Pressable } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useNavigation } from '@react-navigation/native';
+import { SharedElement } from 'react-navigation-shared-element';
 import { capitalize } from '../../util/Index';
 import { addToFavorites, removeFromFavorites } from '../../slices/photosSlice';
-import ShowModal from './ShowModal';
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
 function LineItem({ item }) {
   const dispatch = useDispatch();
   const photos = useSelector((state) => state.photos.favorites);
-  const [modalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
 
   const ifExists = (photo) => {
     if (photos.filter((itm) => itm.id === photo.id).length > 0) {
@@ -51,18 +52,18 @@ function LineItem({ item }) {
     return false;
   };
 
-  const show = () => setModalVisible(true);
-  const hide = () => setModalVisible(false);
-
   return (
     <View style={styles.itemContainer}>
-      <Pressable onPress={show}>
-        <Image style={styles.image} source={{ uri: item.thumbnailUrl }} />
+      <Pressable onPress={() => navigation.navigate('Details', { item })}>
+        <SharedElement id={`item.${item.id}.thumbnailUrl`}>
+          <Image style={styles.image} resizeMode="cover" source={{ uri: item.thumbnailUrl }} />
+        </SharedElement>
+        <SharedElement id={`item.${item.id}.title`}>
+          <Text numberOfLines={1} style={styles.textContainer}>
+            {capitalize(item.title + item.title)}
+          </Text>
+        </SharedElement>
       </Pressable>
-      <ShowModal item={item} modalVisible={modalVisible} hide={hide} />
-      <Text numberOfLines={1} style={styles.textContainer}>
-        {capitalize(item.title + item.title)}
-      </Text>
       <TouchableOpacity
         style={styles.iconContainer}
         onPress={() => {
