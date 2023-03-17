@@ -1,7 +1,6 @@
 import React from 'react';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import DetaileScreen from '../screens/DetailesScreen';
-// import HomeScreen from '../screens/HomeScreen';
 import MyTabs from './BottomNavigator';
 
 const Stack = createSharedElementStackNavigator();
