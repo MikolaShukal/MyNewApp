@@ -19,7 +19,7 @@ export default function FavoritesScreen() {
           data={photos}
           ItemSeparatorComponent={<View style={{ marginTop: 19 }} />}
           renderItem={({ item }) => <LineItem item={item} />}
-          keyExtractor={({ id }) => id.toString()}
+          keyExtractor={({ animeId }) => animeId}
         />
       </SafeAreaView>
     </View>

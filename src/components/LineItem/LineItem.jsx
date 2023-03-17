@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useNavigation } from '@react-navigation/native';
 import { SharedElement } from 'react-navigation-shared-element';
-import { capitalize } from '../../util/Index';
+// import { capitalize } from '../../util/Index';
 import { addToFavorites, removeFromFavorites } from '../../slices/photosSlice';
 
 const styles = StyleSheet.create({
@@ -46,7 +46,7 @@ function LineItem({ item }) {
   const navigation = useNavigation();
 
   const ifExists = (photo) => {
-    if (photos.filter((itm) => itm.id === photo.id).length > 0) {
+    if (photos.filter((itm) => itm.animeId === photo.animeId).length > 0) {
       return true;
     }
     return false;
@@ -55,12 +55,12 @@ function LineItem({ item }) {
   return (
     <View style={styles.itemContainer}>
       <Pressable onPress={() => navigation.navigate('Details', { item })}>
-        <SharedElement id={`item.${item.id}.thumbnailUrl`}>
-          <Image style={styles.image} resizeMode="cover" source={{ uri: item.thumbnailUrl }} />
+        <SharedElement id={`item.${item.id}.animeImg`}>
+          <Image style={styles.image} resizeMode="cover" source={{ uri: item.animeImg }} />
         </SharedElement>
-        <SharedElement id={`item.${item.id}.title`}>
+        <SharedElement id={`item.${item.id}.animeTitle`}>
           <Text numberOfLines={1} style={styles.textContainer}>
-            {capitalize(item.title + item.title)}
+            {item.animeTitle}
           </Text>
         </SharedElement>
       </Pressable>

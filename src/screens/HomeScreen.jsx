@@ -48,7 +48,7 @@ export default function HomeScreen() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/photos?albumId=1')
+    fetch('https://gogoanime.consumet.stream/popular')
       .then((response) => response.json())
       .then((json) => {
         setSearchArray(json);
@@ -63,7 +63,7 @@ export default function HomeScreen() {
   const searchByTitleFunction = (text) => {
     if (text) {
       const newData = photosArray.filter((item) => {
-        const itemData = item.title ? item.title.toUpperCase() : ''.toUpperCase();
+        const itemData = item.animeTitle ? item.animeTitle.toUpperCase() : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
@@ -98,7 +98,7 @@ export default function HomeScreen() {
           data={searchArray}
           ItemSeparatorComponent={<View style={{ marginTop: 19 }} />}
           renderItem={({ item }) => <LineItem item={item} />}
-          keyExtractor={({ id }) => id.toString()}
+          keyExtractor={({ animeId }) => animeId}
         />
       </SafeAreaView>
     </View>

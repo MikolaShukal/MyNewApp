@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { SharedElement } from 'react-navigation-shared-element';
 
@@ -16,6 +16,11 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     marginTop: 10,
+  },
+  linkText: {
+    fontSize: 20,
+    marginTop: 10,
+    textDecorationLine: 'underline',
   },
   iconContainer: {
     position: 'absolute',
@@ -34,10 +39,18 @@ const DetaileScreen = ({ route, navigation }) => {
   return (
     <View style={styles.itemContainer}>
       <SharedElement id={`item.${item.id}.thumbnailUrl`}>
-        <Image style={styles.image} resizeMode="cover" source={{ uri: item.url }} />
+        <Image style={styles.image} resizeMode="cover" source={{ uri: item.animeImg }} />
       </SharedElement>
-      <SharedElement id={`item.${item.id}.title`}>
-        <Text style={styles.text}>{item.title}</Text>
+      <SharedElement id={`item.${item.id}.animeTitle`}>
+        <Text style={styles.text}>{item.animeTitle}</Text>
+      </SharedElement>
+      <SharedElement id={`item.${item.id}.releasedDate`}>
+        <Text style={styles.text}>{`Relise date: ${item.releasedDate}`}</Text>
+      </SharedElement>
+      <SharedElement id={`item.${item.id}.animeUrl`}>
+        <Text style={styles.linkText} onPress={() => Linking.openURL(item.animeUrl)}>
+          You can watch this anime here.
+        </Text>
       </SharedElement>
       <TouchableOpacity
         style={styles.iconContainer}
@@ -55,12 +68,22 @@ DetaileScreen.sharedElements = (route) => {
   const { item } = route.params;
   return [
     {
-      id: `item.${item.id}.thumbnailUrl`,
+      id: `item.${item.id}.animeImg`,
       animation: 'move',
       resize: 'clip',
     },
     {
       id: `item.${item.id}.title`,
+      animation: 'fade',
+      resize: 'clip',
+    },
+    {
+      id: `item.${item.id}.releasedDate`,
+      animation: 'fade',
+      resize: 'clip',
+    },
+    {
+      id: `item.${item.id}.animeUrl`,
       animation: 'fade',
       resize: 'clip',
     },
